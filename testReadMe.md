@@ -1,6 +1,6 @@
 # Sex Prediction from RNASeq
 
-The 01-clean_split_data.R, 02-train_elasticnet.R, 03-evaluate_model.R pipeline trains and evaluates an elasticnet logistic regression model to predict sex from RNASeq data.  The training features are gene expression transcripts, and the training labels are reported_gender values for each sample.
+The 01-clean_split_data.R, 02-train_elasticnet.R, 03-evaluate_model.R, 04-present_results.Rmd pipeline trains and evaluates an elasticnet logistic regression model to predict sex from RNASeq data.  The training features are gene expression transcripts, and the training labels are reported_gender values for each sample.
 
 The pipeline is a response to issue [#84](https://github.com/AlexsLemonade/OpenPBTA-analysis/issues/84). Based on the accuracy achieved here, this classifier can be helpful to predict values for datasets without annotated sex information.
 
@@ -98,6 +98,42 @@ intersection_wxs_CDS_genome_size
 - All file path-related options assume the file path given is relative to `OpenPBTA-analysis/analyses/sex-prediction-from-RNASeq`.
 - The scripts create user-specified output directories that do not exist at run time.
 - The scripts add files whose names do not match existing files in the output directories.  Output files whose names match existing files overwrite the previous versions.
+
+### run-sex-prediction-from-RNASeq.sh
+
+A bash shell script that runs the entire pipeline.  Global arguments for the entire pipeline are specified in the USER-SPECIFIED ARGUMENTS section of the script
+
+
+**Argument descriptions**
+```
+PROCESSED
+output directory of script 01, input directory of scripts 02 and 03
+
+MODELS
+outtput directory of script 02, input directory of script 03
+
+RESULTS
+output directory of script 03
+
+SEED
+argument for script 01 processing and script 02 and 03 input file specification
+
+FILENAME_LEAD
+argument for script 01 output file specification and script 02 and 03 input and output file specification
+
+TRANSCRIPT_TAIL_PERCENT_ARRAY
+a bash shell script array to control median absolute deviation filtering of training transcripts.  Array values must be between 0 and 1.  No limit on the size of the array.  For each value in the array, a model is trained and evaluated by filtering out the bottom (1 - TRANSCRIPT_TAIL_PERCENT_ARRAY value) of transcripts from the training set.
+
+TRAIN_PERCENT
+a value greater than 0 and less than or equal to 1.  The expression dataset is partitioned TRAIN_PERCENT for training and (1 - TRAIN_PERCENT) for testing.  If TRAIN_PERCENT = 1, no test set is created.
+  
+TRAIN_TARGET_COLUMN
+argument to specify what column in the target data frame will be used as labels during training
+
+targetColumns
+a bash shell script array specifying the columns to be used as test labels when evaluating a model's performance.Performance reports are produced for each value in the array.  No limit on the size of the array.
+
+```
 
 ### 01-clean_split_data.R
 
