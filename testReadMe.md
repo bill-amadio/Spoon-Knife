@@ -116,13 +116,14 @@ RESULTS
 output directory of script 03
 
 SEED
-argument for script 01 processing and script 02 and 03 input file specification
+seed for R's pseudorandom number generator
 
 FILENAME_LEAD
 argument for script 01 output file specification and script 02 and 03 input and output file specification
 
 TRANSCRIPT_TAIL_PERCENT_ARRAY
-a bash shell script array to control median absolute deviation filtering of training transcripts.  Array values must be between 0 and 1.  No limit on the size of the array.  For each value in the array, a model is trained and evaluated by filtering out the bottom (1 - TRANSCRIPT_TAIL_PERCENT_ARRAY value) of transcripts from the training set.
+a bash shell script array to control median absolute deviation filtering of training transcripts.  Array values must be between 0 and 1.  
+No limit on the size of the array.  For each value in the array, a model is trained and evaluated by filtering out the bottom (1 - TRANSCRIPT_TAIL_PERCENT_ARRAY value) of transcripts from the training set.
 
 TRAIN_PERCENT
 a value greater than 0 and less than or equal to 1.  The expression dataset is partitioned TRAIN_PERCENT for training and (1 - TRAIN_PERCENT) for testing.  If TRAIN_PERCENT = 1, no test set is created.
