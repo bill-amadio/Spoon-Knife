@@ -1,7 +1,8 @@
 # Sex Prediction from RNASeq
 
-This analysis evaluates [MAF files](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) from different SNV callers, compares their output, and creates a [consensus mutation file](./results/consensus/consensus_mutation.maf.tsv.zip).
-This consensus mutation file is [MAF-like](#consensus-mutation-call) meaning it is TSV file that contains the fields of a [MAF file](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) but adds [VAF](#variant-allele-fraction-calculation), but does not contain a starting comment line with a version number.
+The 01-clean_split_data.R, 02-train_elasticnet.R, 03-evaluate_model.R pipeline trains and evaluates an elasticnet logistic regression model to predict sex from RNASeq data.  The training features are gene expression transcripts, and the training labels are reported_gender values for each sample.
+
+The pipeline is a response to issue [#84](https://github.com/AlexsLemonade/OpenPBTA-analysis/issues/84). Based on the accuracy achieved here, this classifier can be helpful to predict values for datasets without annotated sex information.
 
 See the comparison results plots [here](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).
 
