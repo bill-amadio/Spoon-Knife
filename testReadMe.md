@@ -122,25 +122,30 @@ FILENAME_LEAD
 argument for script 01 output file specification and script 02 and 03 input and output file specification
 
 TRANSCRIPT_TAIL_PERCENT_ARRAY
-a bash shell script array to control median absolute deviation filtering of training transcripts.  Array values must be between 0 and 1.  
-No limit on the size of the array.  For each value in the array, a model is trained and evaluated by filtering out the bottom (1 - TRANSCRIPT_TAIL_PERCENT_ARRAY value) of transcripts from the training set.
+a bash shell script array to control median absolute deviation filtering of training transcripts.  Array 
+values must be between 0 and 1.  No limit on the size of the array.  For each value in the array, a model 
+is trained and evaluated by filtering out the bottom (1 - TRANSCRIPT_TAIL_PERCENT_ARRAY value) of transcripts 
+from the training set.
 
 TRAIN_PERCENT
-a value greater than 0 and less than or equal to 1.  The expression dataset is partitioned TRAIN_PERCENT for training and (1 - TRAIN_PERCENT) for testing.  If TRAIN_PERCENT = 1, no test set is created.
+a value greater than 0 and less than or equal to 1.  The expression dataset is partitioned TRAIN_PERCENT 
+for training and (1 - TRAIN_PERCENT) for testing.  If TRAIN_PERCENT = 1, no test set is created.
   
 TRAIN_TARGET_COLUMN
 argument to specify what column in the target data frame will be used as labels during training
 
 targetColumns
-a bash shell script array specifying the columns to be used as test labels when evaluating a model's performance.Performance reports are produced for each value in the array.  No limit on the size of the array.
+a bash shell script array specifying the columns to be used as test labels when evaluating a model's 
+performance.  Performance reports are produced for each value in the array.  No limit on the size of 
+the array.
 
 ```
 
 ### 01-clean_split_data.R
 
-This script cleans the gene expression data -- i.e., it drops anything with invalid labels in either reported_gender or 
-germline_sex_estimate, and if the training partition size < 1.0, it splits the data into training and testing sets that 
-are saved as separate files to be used downstream.
+This script cleans the gene expression data -- i.e., it drops anything with invalid labels in either 
+reported_gender or germline_sex_estimate, and if the training partition size < 1.0, it splits the data 
+into training and testing sets that are saved as separate files to be used downstream.
 
 
 **Argument descriptions**
@@ -149,16 +154,22 @@ are saved as separate files to be used downstream.
     File path and file name of the OpenPBTA gene expression file used for the current run of the pipeline(RDS)
   --metadata ../../data/pbta-histologies.tsv 
     File path and file name of the OpenPBTA histologies file used for the current run(TSV)
-  --output_directory PROCESSED 
-    File path where you would like the cleaned training and test sets to be stored
-  --train_expression_file_name TRAIN_EXPRESSION_FILE_NAME 
-    
-  --test_expression_file_name $TEST_EXPRESSION_FILE_NAME \
-  --train_targets_file_name $TRAIN_TARGETS_FILE_NAME  \
-  --test_targets_file_name $TEST_TARGETS_FILE_NAME \
-  --full_targets_file_name $FULL_TARGETS_FILE_NAME \
-  --seed $SEED \
-  --train_percent $TRAIN_PERCENT
+  --output_directory PROCESSED (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+    File path where you would like the cleaned training and test sets to be stored.
+  --train_expression_file_name TRAIN_EXPRESSION_FILE_NAME=${FILENAME_LEAD}_${SEED}_train_expression.RDS 
+    Name for the training expression set output file
+  --test_expression_file_name TEST_EXPRESSION_FILE_NAME=${FILENAME_LEAD}_${SEED}_test_expression.RDS
+    Name for the test expression set output file
+  --train_targets_file_name TRAIN_TARGETS_FILE_NAME=${FILENAME_LEAD}_${SEED}_train_targets.tsv
+    Name for the training label set output file
+  --test_targets_file_name TEST_TARGETS_FILE_NAME=${FILENAME_LEAD}_${SEED}_test_targets.tsv
+    Name for the test label set output file
+  --full_targets_file_name FULL_TARGETS_FILE_NAME=${FILENAME_LEAD}_${SEED}_full_targets.tsv
+    Name for the combined training and test label set output file
+  --seed SEED (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+    seed for random number generation
+  --train_percent TRAIN_PERCENT (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+    controls training/test partition
 
   -d DB_FILE, --db-file DB_FILE
      Path of the database file to use or create. Defaults to `data.sqlite`.
