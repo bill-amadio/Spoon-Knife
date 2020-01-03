@@ -97,7 +97,8 @@ intersection_wxs_CDS_genome_size
 - The scripts are sequential as noted by their number.
 - All file path-related options assume the file path given is relative to `OpenPBTA-analysis/analyses/sex-prediction-from-RNASeq`.
 - The scripts create user-specified output directories that do not exist at run time.
-- The scripts add files whose names do not match existing files in the output directories.  Output files whose names match existing files overwrite the previous versions.
+- The scripts add files whose names do not match existing files, if any, in the output directories.  Output files whose names 
+  match existing files overwrite the previous versions.
 
 ### run-sex-prediction-from-RNASeq.sh
 
