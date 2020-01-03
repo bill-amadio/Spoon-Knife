@@ -99,14 +99,30 @@ intersection_wxs_CDS_genome_size
 - The scripts create user-specified output directories that do not exist at run time.
 - The scripts add files whose names do not match existing files in the output directories.  Output files whose names match existing files overwrite the previous versions.
 
-### 01-setup_db.py
+### 01-clean_split_data.R
 
-Creates and/or fills an SQLite database of variant calls that will be used by subsequent steps to find consensus mutations.
-Note: requires `pandas` to be installed, and expects python3
-All arguments are optional; only the included tables will be affected.
+This script cleans the gene expression data -- i.e., it drops anything with invalid labels in either reported_gender or 
+germline_sex_estimate, and if the training partition size < 1.0, it splits the data into training and testing sets that 
+are saved as separate files to be used downstream.
+
 
 **Argument descriptions**
 ```
+  --expression ../../data/pbta-gene-expression-kallisto.stranded.rds 
+    File path and file name of the OpenPBTA gene expression file used for the current run of the pipeline(RDS)
+  --metadata ../../data/pbta-histologies.tsv 
+    File path and file name of the OpenPBTA histologies file used for the current run(TSV)
+  --output_directory PROCESSED 
+    File path where you would like the cleaned training and test sets to be stored
+  --train_expression_file_name TRAIN_EXPRESSION_FILE_NAME 
+    
+  --test_expression_file_name $TEST_EXPRESSION_FILE_NAME \
+  --train_targets_file_name $TRAIN_TARGETS_FILE_NAME  \
+  --test_targets_file_name $TEST_TARGETS_FILE_NAME \
+  --full_targets_file_name $FULL_TARGETS_FILE_NAME \
+  --seed $SEED \
+  --train_percent $TRAIN_PERCENT
+
   -d DB_FILE, --db-file DB_FILE
      Path of the database file to use or create. Defaults to `data.sqlite`.
    --strelka-file STRELKA_FILE
