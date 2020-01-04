@@ -155,7 +155,11 @@ into training and testing sets that are saved as separate files to be used downs
     File path and file name of the OpenPBTA gene expression file used for the current run of the pipeline(RDS)
   --metadata ../../data/pbta-histologies.tsv 
     File path and file name of the OpenPBTA histologies file used for the current run(TSV)
-  --output_directory PROCESSED (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+    
+Values for the following arguments are computed in run-sex-prediction-from-RNASeq using values from the 
+USER-SPECIFIED-ARGUMENTS.
+
+  --output_directory PROCESSED 
     File path where you would like the cleaned training and test sets to be stored.
   --train_expression_file_name TRAIN_EXPRESSION_FILE_NAME=${FILENAME_LEAD}_${SEED}_train_expression.RDS 
     Name for the training expression set output file
@@ -167,9 +171,9 @@ into training and testing sets that are saved as separate files to be used downs
     Name for the test label set output file
   --full_targets_file_name FULL_TARGETS_FILE_NAME=${FILENAME_LEAD}_${SEED}_full_targets.tsv
     Name for the combined training and test label set output file
-  --seed SEED (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+  --seed $SEED
     seed for random number generation
-  --train_percent TRAIN_PERCENT (set in USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh)
+  --train_percent $TRAIN_PERCENT 
     controls training/test partition
 
   -d DB_FILE, --db-file DB_FILE
