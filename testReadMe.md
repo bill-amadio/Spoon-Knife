@@ -142,7 +142,7 @@ the array.
 
 ```
 
-### 01-clean_split_data.R
+### 01-clean_split_data
 
 This script cleans the gene expression data -- i.e., it drops anything with invalid labels in either 
 reported_gender or germline_sex_estimate, and if the training partition size < 1.0, it splits the data 
