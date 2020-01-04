@@ -18,7 +18,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
     - [All mutations TMB](#all-mutations-tmb)
     - [Coding only TMB](#coding-only-tmb)
 - [General usage of scripts](#general-usage-of-scripts)
-  - [01-clean_split_data.R](#01-clean_split_data)
+  - [01-clean_split_data.R](#01-clean_split_data.R)
   - [02-merge_callers.R](#02-merge_callersr)
   - [03-calculate_tmb.R](#03-calculate_tmbr)
 
