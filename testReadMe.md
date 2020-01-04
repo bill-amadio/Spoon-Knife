@@ -245,7 +245,7 @@ the values of targetColumns.
 A Notebook that produces tables and plots from the output files of 02-train_elasticnet.R and 03-evaluate_model.R.  
 Plots produced are Strength of Calls at Maximum Accuracy, Predictive Accuracy vs. Number of Training Transcripts,
 Number of Non-Zero Features vs. Number of Training Transcripts.  Tables are Confusion Matrix at Maximum Accuracy
-and Two Class Summary at Maximum Accuracy. Each of the tables and charts are produced for each value of the
+and Two Class Summary at Maximum Accuracy. Each of the tables and charts is produced for each value of the
 targetColumns array specified in the USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh.
 
 
