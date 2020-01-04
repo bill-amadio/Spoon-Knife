@@ -19,7 +19,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
     - [Coding only TMB](#coding-only-tmb)
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
-  - [01-clean_split_data.R](#01-clean split data)
+  - [01-clean_split_data.R](#01-clean-split-data)
   - [02-merge_callers.R](#02-merge_callersr)
   - [03-calculate_tmb.R](#03-calculate_tmbr)
 
@@ -143,7 +143,7 @@ the array.
 
 ```
 
-### 01-clean split data
+### 01-clean-split-data
 
 This script cleans the gene expression data -- i.e., it drops anything with invalid labels in either 
 reported_gender or germline_sex_estimate, and if the training partition size < 1.0, it splits the data 
