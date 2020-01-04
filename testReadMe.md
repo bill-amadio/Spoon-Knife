@@ -22,7 +22,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
   - [01-clean_split_data.R](#01-clean-split-data)
   - [02-train_elasticnet.R](#02-train_elasticnet)
   - [03-evaluate_model.R](#03-evaluate_model)
-  - [04-present_results.Rmd](04-present_results.Rmd)
+  - [04-present_results.Rmd](04-present_results)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -240,7 +240,7 @@ the values of targetColumns.
 
 ```
 
-### 04-present_results.Rmd
+### 04-present_results
 
 A Notebook that produces tables and plots from the output files of 02-train_elasticnet.R and 03-evaluate_model.R.  
 Plots produced are Strength of Calls at Maximum Accuracy, Predictive Accuracy vs. Number of Training Transcripts,
