@@ -207,7 +207,13 @@ This script evaluates the elastic net logistic regression models that were train
 02-train_elasticnet.R from a training set and known target values set that was cleaned and saved 
 in script 01-clean_split_data.R.  This script runs within the same loop described for script
 02-train_elasticnet.R, and within a second nested loop over the values of the targetColumns
-argument in the USER_SPECIFIED_ARGUMENTS section of run-sex-prediction-from-RNASeq.sh.
+argument in the USER_SPECIFIED_ARGUMENTS section of run-sex-prediction-from-RNASeq.sh.  Output
+files for each value of targetColumns go to a separate directory named with the current
+targetColumns value.
+
+Model evaluations are done with the caret::confusionMatrix and caret::twoClassSummary functions.
+twoClassSummary can fail if one of the Confusion Matrix rows is all zeros.  In that case, no
+twoClassSummary file is output for the transcript_tail_percent value in question.
 
 
 **Argument descriptions**
@@ -224,7 +230,34 @@ the values of targetColumns.
       --test_target_column ${t} 
       --output_directory $RESULTS_OUTPUT_DIRECTORY=${RESULTS}/${TEST_TARGET_COLUMN}
       --cm_set_file_name $CM_SET_FILE=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_prediction_details.tsv
+        A file containing prediction proabilities for each sample in the test set.
       --cm_file_name $CM_SET=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_confusion_matrix.RDS
+        A file containing the confusion matrix object out of caret::confusionMatrix.
       --summary_file_name $SUMMARY_FILE=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_two_class_summary.RDS
+        A file containing the two class summary object out of caret::twoClassSummary.
+
+```
+
+### 04-present_results.Rmd
+
+A Notebook that produces tables and plots from the output files of 02-train_elasticnet.R and 03-evaluate_model.R.  
+Plots produced are Strength of Calls at Maximum Accuracy, Predictive Accuracy vs. Number of Training Transcripts,
+Number of Non-Zero Features vs. Number of Training Transcripts.  Tables are Confusion Matrix at Maximum Accuracy
+and Two Class Summary at Maximum Accuracy. Each of the tables and charts are produced for each value of the
+targetColumns array specified in the USER-SPECIFIED ARGUMENTS section of run-sex-prediction-from-RNASeq.sh.
+
+
+**Argument descriptions**
+```
+Values for all arguments are computed in run-sex-prediction-from-RNASeq.sh using values from the 
+USER-SPECIFIED-ARGUMENTS and arguments computed for 01-clean_split_data.R, 02-train_elasticnet.R
+and 03-evaluate_model.R.
+
+  --results_dir=${RESULTS} 
+  --model_dir=$MODELS 
+  --cm_set=$CM_SET 
+  --seed=$SEED 
+  --target_columns=$targetColumns_to_pass
+    A string constructed from the values of the targetColumns array in USER-SPECIFIED ARGUMENTS.
 
 ```
