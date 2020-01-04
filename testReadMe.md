@@ -20,9 +20,9 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
   - [01-clean_split_data.R](#01-clean-split-data)
-  - [02-train_elasticnet.R](#02-train_elasticnet)
+  - [02-train_elasticnet.R](#02-train_elasticnet)  
   - [03-evaluate_model.R](#03-evaluate_model)
-  - [04-present_results.Rmd](04-present_results)
+  - [04-present_results.Rmd](#04-present_results)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
