@@ -18,6 +18,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
     - [All mutations TMB](#all-mutations-tmb)
     - [Coding only TMB](#coding-only-tmb)
 - [General usage of scripts](#general-usage-of-scripts)
+  - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
   - [01-clean_split_data.R](#01-clean_split_data.R)
   - [02-merge_callers.R](#02-merge_callersr)
   - [03-calculate_tmb.R](#03-calculate_tmbr)
@@ -100,7 +101,7 @@ intersection_wxs_CDS_genome_size
 - The scripts add files whose names do not match existing files, if any, in the output directories.  Output files whose names 
   match existing files overwrite the previous versions.
 
-### run-sex-prediction-from-RNASeq.sh
+### run-sex-prediction-from-RNASeq
 
 A bash shell script that runs the entire pipeline.  Global arguments for the pipeline are specified in the USER-SPECIFIED ARGUMENTS section of the script
 
