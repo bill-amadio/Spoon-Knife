@@ -136,7 +136,7 @@ TRAIN_TARGET_COLUMN
 argument to specify what column in the target data frame will be used as labels during training
 
 targetColumns
-a bash shell script array specifying the columns to be used as test labels when evaluating a model's 
+a bash shell script array specifying the columns to be used as ground truth labels when evaluating a model's 
 performance.  Performance reports are produced for each value in the array.  No limit on the size of 
 the array.
 
@@ -176,19 +176,6 @@ USER-SPECIFIED-ARGUMENTS.
   --train_percent $TRAIN_PERCENT 
     controls training/test partition
 
-  -d DB_FILE, --db-file DB_FILE
-     Path of the database file to use or create. Defaults to `data.sqlite`.
-   --strelka-file STRELKA_FILE
-     Path of the MAF formatted data file from the strelka2 caller(TSV).
-   --mutect-file MUTECT_FILE
-     Path of the MAF formatted data file from the mutect2 caller(TSV).
-   --lancet-file LANCET_FILE
-     Path of the MAF formatted data file from the lancet caller(TSV).
-   --vardict-file VARDICT_FILE
-     Path of the MAF formatted data file from the vardict caller(TSV).
-   --meta-file META_FILE, --hist-file META_FILE
-     Path of the metadata/histology data file(TSV).
-   --overwrite           Overwrite tables that may already exist.
 ```
 
 ### 02-train_elasticnet.R
@@ -213,51 +200,31 @@ loop over the values of TRANSCRIPT_TAIL_ARRAY.
  --train_target_column $TRAIN_TARGET_COLUMN 
  --transcript_tail_percent ${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---db_file : Path to sqlite database file made from 01-setup_db.py
- --output_file : File path and file name of where you would like the MAF-like
-                 output from this script to be stored.
- --vaf_filter: Optional Variant Allele Fraction filter. Specify a number; any
-               mutations with a VAF that are NA or below this number will be
-               removed from the vaf data.frame before it is saved to a TSV file.
- --overwrite : If TRUE, will overwrite any reports of the same name. Default is
-              FALSE
 ```
-### 03-calculate_tmb.R
+### 03-evaluate_model.R
 
-Using the consensus file created in `02-merge_callers.R`, calculate TMB for all
-WGS and WXS samples.
-Two TMB files are created, one including *all snv* called by Strelka2 and Mutect2 (Lancet is excluded from this TMB calculation consensus because of a [coding region bias in the way it was ran](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#snv-and-indel-calling)), and a *coding snvs only* TMB calculation.
+This script evaluates the elastic net logistic regression models that were trained in script 
+02-train_elasticnet.R from a training set and known target values set that was cleaned and saved 
+in script 01-clean_split_data.R.  This script runs within the same loop described for script
+02-train_elasticnet.R, and within a second nested loop over the values of the targetColumns
+argument in the USER_SPECIFIED_ARGUMENTS section of run-sex-prediction-from-RNASeq.sh.
+
 
 **Argument descriptions**
 ```
- --consensus : File path to the MAF-like file.
- --db_file : Path to sqlite database file made from 01-setup_db.py
- --metadata : Relative file path to MAF file to be analyzed. Can be .gz compressed.
-              Assumes file path is given from top directory of 'OpenPBTA-analysis'.
- --bed_wgs : File path that specifies the caller-specific BED regions file.
-             Assumes from top directory, 'OpenPBTA-analysis'.
- --bed_wxs : File path that specifies the WXS BED regions file. Assumes file path
-             is given from top directory of 'OpenPBTA-analysis'
- --overwrite : If specified, will overwrite any files of the same name. Default is FALSE.
+Values for all arguments are computed in run-sex-prediction-from-RNASeq.sh using values from the 
+USER-SPECIFIED-ARGUMENTS and arguments computed for 01-clean_split_data.R and 02-train_elasticnet.R.
+i is the index of the loop over the values of TRANSCRIPT_TAIL_ARRAY; t is the index of the loop over
+the values of targetColumns.
+
+      --test_expression_file_name ${PROCESSED}/$TEST_EXPRESSION_FILE_NAME 
+      --test_targets_file_name ${PROCESSED}/$TEST_TARGETS_FILE_NAME 
+      --model_object_file_name ${MODELS}/$MODEL_OBJECT_FILE_NAME 
+      --model_transcripts_file_name ${MODELS}/$MODEL_TRANSCRIPTS_FILE_NAME 
+      --test_target_column ${t} 
+      --output_directory $RESULTS_OUTPUT_DIRECTORY=${RESULTS}/${TEST_TARGET_COLUMN}
+      --cm_set_file_name $CM_SET_FILE=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_prediction_details.tsv
+      --cm_file_name $CM_SET=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_confusion_matrix.RDS
+      --summary_file_name $SUMMARY_FILE=${FILENAME_LEAD}_${SEED}_${TRANSCRIPT_TAIL_PERCENT_ARRAY[i]}_two_class_summary.RDS
+
 ```
