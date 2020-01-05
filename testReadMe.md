@@ -36,7 +36,7 @@ This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS
   - `processed_data` holds the output of script 01-clean_split_data.R.  Five files: expression and target files for training and testing plus a file containing the training and testing target values combined.
   - `models` holds the output of script 02-train_elasticnet.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the best fitting model object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the indices of the training transcripts used in that model and the non-zero coefficients of the model.
   - `results` holds the output of script 03-evaluate_model.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the caret::confusionMatrix for the model for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the caret::twoClassSummary object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value (Note: caret::twoClassSummary function can fail under certain conditions, so these files may be missing for certain TRANSCRIPT_TAIL_PERCENT_ARRAY values.) and prediction probabilities for each sample in the test set.
- - `results/plots` holds .png copies of the plots presented in the `04-present_results.html` notebook.
+  - `results/plots` holds .png copies of the plots presented in the `04-present_results.html` notebook.
   
 ## Summary of Methods
 
