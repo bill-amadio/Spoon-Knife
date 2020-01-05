@@ -36,8 +36,12 @@ bash run-sex-prediction-from-RNASeq.sh
 This bash script will return:
 
 - Plots and tables in a notebook: [`04-present_results.html`](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).
-- A files organized as follows:
-  - `pbta-snv-consensus-mutation.maf.tsv` - is  [MAF-like file](#consensus-mutation-call) that contains the snvs that were called by all three of these callers for a given sample are saved to this file.
+- Files organized in subfolders of the folder containing run-sex-prediction-from-RNASeq.sh as follows:
+  - `processed_data` holds the output of script 01-clean_split_data.R.  Five files: expression and target files for training and testing plus a file containing the training and testing target values combined.
+  - `models` holds the output of script 02-train_elasticnet.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the best fitting model object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the indices of the training transcripts used in that model and the non-zero coefficients of the model.
+
+  
+  - is  [MAF-like file](#consensus-mutation-call) that contains the snvs that were called by all three of these callers for a given sample are saved to this file.
   These files combine the [MAF file data](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) from 3 different SNV callers: [Mutect2](https://software.broadinstitute.org/cancer/cga/mutect), [Strelka2](https://github.com/Illumina/strelka), and [Lancet](https://github.com/nygenome/lancet).
   See the methods on the callers' settings [here](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#somatic-single-nucleotide-variant-calling) and see [the methods of this caller analysis and comparison below](#summary-of-methods).  
   - `pbta-snv-consensus-mutation-tmb-coding.tsv` - Tumor Mutation burden calculations using *coding only* mutations use the consensus of Lancet, Mutect2, and Strelka2.
