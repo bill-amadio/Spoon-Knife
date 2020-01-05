@@ -12,8 +12,9 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
-  - [Train-Test](#Train-Test)
+  - [Train/Test](#Train-Test)
   - [Model Building](#Model-Building)
+  - [Model Evaluation](#Model-Evaluation)
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
   - [01-clean_split_data.R](#01-clean-split-data)
