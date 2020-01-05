@@ -13,7 +13,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
   - [Train/Test](#Train-Test)
-  - [Model Building](#Model Building)
+  - [Model Building](#Model-Building)
   - [Model Evaluation](#Model-Evaluation)
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
@@ -47,13 +47,13 @@ This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS
 Input data is split into training and test partitions according to the user-specified argument TRAIN_PERCENT.
 
 
-### Model Building
+### Model-Building
 
 The glmnet package is used to fit an elastic net logistic regression model via penalized maximum likelihood.  The glmnetUtils package is used to do elastic net cross-validation for alpha and lambda simultaneously.
 
 ### Model-Evaluation
 
-The caret package is used to generate a confusion matrix object and a two class summary object for each model.  Statistics calculated by caret functions are documented [here](http://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes) and [here](http://topepo.github.io/caret/measuring-performance.html#measures-for-class-probabilities).
+The caret package is used to generate a confusion matrix object and a two-class summary object for each model.  Definitions of the statistics presented are found in the documentation for the [confusion matrix function](http://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes) and the [two-class summary function](http://topepo.github.io/caret/measuring-performance.html#measures-for-class-probabilities).
 
 
 ## General usage of scripts
