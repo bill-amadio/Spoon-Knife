@@ -10,7 +10,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [How to run the caller consensus analysis](#how-to-run-the-caller-consensus-analysis)
+- [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
   - [Variant Allele Fraction Calculation](#variant-allele-fraction-calculation)
   - [Mutation Comparisons](#mutation-comparisons)
@@ -26,17 +26,17 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## How to run the caller consensus analysis
+## How to run sex-prediction-from-RNASeq
 
-To run the evaluations and comparisons of all the SNV callers, call the bash script:
+To run the full pipeline of data prep, model building, model evaluation and results presentation, call the bash script:
 
 ```
-bash run_caller_analysis.sh
+bash run-sex-prediction-from-RNASeq.sh
 ```
 This bash script will return:
 
-- Comparison plots in a notebook: [`compare_snv_callers_plots.nb.html`](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).
-- A zip file containing:
+- Plots and tables in a notebook: [`04-present_results.html`](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).
+- A files organized as follows:
   - `pbta-snv-consensus-mutation.maf.tsv` - is  [MAF-like file](#consensus-mutation-call) that contains the snvs that were called by all three of these callers for a given sample are saved to this file.
   These files combine the [MAF file data](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) from 3 different SNV callers: [Mutect2](https://software.broadinstitute.org/cancer/cga/mutect), [Strelka2](https://github.com/Illumina/strelka), and [Lancet](https://github.com/nygenome/lancet).
   See the methods on the callers' settings [here](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#somatic-single-nucleotide-variant-calling) and see [the methods of this caller analysis and comparison below](#summary-of-methods).  
