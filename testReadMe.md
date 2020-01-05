@@ -12,8 +12,8 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
-  - [Variant Allele Fraction Calculation](#variant-allele-fraction-calculation)
-  - [Mutation Comparisons](#mutation-comparisons)
+  - [Train-Test](#Train-Test)
+  - [Model Building](#Model Building)
   - [Tumor Mutation Burden Calculation](#tumor-mutation-burden-calculation)
     - [All mutations TMB](#all-mutations-tmb)
     - [Coding only TMB](#coding-only-tmb)
@@ -33,7 +33,7 @@ To run the full pipeline of data prep, model building, model evaluation and resu
 ```
 bash run-sex-prediction-from-RNASeq.sh
 ```
-This bash script will return:
+This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS section of the script.  The script will return:
 
 - Plots and tables in a notebook: [`04-present_results.html`](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).
 - Files organized in subfolders of the folder containing run-sex-prediction-from-RNASeq.sh as follows:
@@ -41,26 +41,15 @@ This bash script will return:
   - `models` holds the output of script 02-train_elasticnet.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the best fitting model object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the indices of the training transcripts used in that model and the non-zero coefficients of the model.
   - `results` holds the output of script 03-evaluate_model.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the caret::confusionMatrix for the model for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the caret::twoClassSummary object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value (Note: caret::twoClassSummary function can fail under certain conditions, so these files may be missing for certain TRANSCRIPT_TAIL_PERCENT_ARRAY values.) and prediction probabilities for each sample in the test set.
   
-  - is  [MAF-like file](#consensus-mutation-call) that contains the snvs that were called by all three of these callers for a given sample are saved to this file.
-  These files combine the [MAF file data](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) from 3 different SNV callers: [Mutect2](https://software.broadinstitute.org/cancer/cga/mutect), [Strelka2](https://github.com/Illumina/strelka), and [Lancet](https://github.com/nygenome/lancet).
-  See the methods on the callers' settings [here](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#somatic-single-nucleotide-variant-calling) and see [the methods of this caller analysis and comparison below](#summary-of-methods).  
-  - `pbta-snv-consensus-mutation-tmb-coding.tsv` - Tumor Mutation burden calculations using *coding only* mutations use the consensus of Lancet, Mutect2, and Strelka2.
-  - `pbta-snv-consensus-mutation-tmb-all.tsv` - Tumor Mutation burden calculations using *all* mutations use the consensus of Mutect2, and Strelka2. (Lancet was excluded because it has a [coding region bias in the way it was run](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#snv-and-indel-calling)).
-
+  
 ## Summary of Methods
 
-### Variant Allele Fraction Calculation
+### Train-Test
 
-Calculate variant allele fraction (VAF) for each variant.
-This is done in `01-setup_db.py`.
+Input data is split into training and test partitions according to the user-specified argument TRAIN_PERCENT.
 
-```
-vaf = (t_alt_count) / (t_ref_count + t_alt_count)
-```
-This is following the [code used in
-`maftools`](https://github.com/PoisonAlien/maftools/blob/1d0270e35c2e0f49309eba08b62343ac0db10560/R/plot_vaf.R#L39).
 
-### Mutation Comparisons
+### Model Building
 
 The default consensus mutations called are those that are shared among all of Strelka2, Mutect2, and Lancet.
 Mutations were considered to be the same if they were identical in the following field: `Chromosome`, `Start_Position`, `Reference_Allele`,  `Allele`, and `Tumor_Sample_Barcode`.
