@@ -13,7 +13,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
   - [Train-Test](#Train-Test)
-  - [Model Building](#Model Building)
+  - [Model Building](#Model-Building)
   - [Tumor Mutation Burden Calculation](#tumor-mutation-burden-calculation)
     - [All mutations TMB](#all-mutations-tmb)
     - [Coding only TMB](#coding-only-tmb)
