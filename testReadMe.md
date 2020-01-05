@@ -8,15 +8,12 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**  
 
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
   - [Train-Test](#Train-Test)
   - [Model Building](#Model-Building)
-  - [Tumor Mutation Burden Calculation](#tumor-mutation-burden-calculation)
-    - [All mutations TMB](#all-mutations-tmb)
-    - [Coding only TMB](#coding-only-tmb)
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
   - [01-clean_split_data.R](#01-clean-split-data)
@@ -51,40 +48,12 @@ Input data is split into training and test partitions according to the user-spec
 
 ### Model-Building
 
-The default consensus mutations called are those that are shared among all of Strelka2, Mutect2, and Lancet.
-Mutations were considered to be the same if they were identical in the following field: `Chromosome`, `Start_Position`, `Reference_Allele`,  `Allele`, and `Tumor_Sample_Barcode`.
-As Strelka2 does not call multinucleotide variants (MNV), but instead calls each component SNV as a separate mutation, MNV calls from Mutect2 and Lancet were separated into consecutive SNVs before comparison with Strelka2.
+The glmnet package is used to fit an elastic net logistic regression model via penalized maximum likelihood.  The glmnetUtils package is used to do elastic net cross-validation for alpha and lambda simultaneously.
 
-### Tumor Mutation Burden Calculation
+### Model-Evaluation
 
-For each experimental strategy and TMB calculation, the intersection of the genomic regions effectively being surveyed are used.
-These genomic regions are used for first filtering mutations to these regions and then for using the size in bp of the genomic regions surveyed as the TMB denominator. 
+The caret package is used to generate a confusion matrix object and a two class summary object for each model.  Statistics calculated by caret functions are documented [here](http://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes) and [here](http://topepo.github.io/caret/measuring-performance.html#measures-for-class-probabilities).
 
-#### All mutations TMB
-
-For all mutation TMBs, Lancet is not used because of the [coding bias in the way it was run.](https://github.com/AlexsLemonade/OpenPBTA-manuscript/blob/master/content/03.methods.md#snv-and-indel-calling)
-For WGS samples, the size of the genome covered by the intersection of Strelka2 and Mutect2's surveyed areas is used for the denominator.
-```
-WGS_all_mutations_TMB = (total # snvs called by Strelka2 and Mutect) / intersection_strelka_mutect_genome_size
-```
-For WXS samples, the size of the genome the WXS bed region file is used for the denominator.
-```
-WXS_all_mutations_TMB = (total # snvs called by Strelka2 and Mutect2 ) / wxs_genome_size
-```
-#### Coding only TMB
-
-Coding only TMB uses all three callers: Strelka2, Mutect2, and Lancet and the intersection demoninators are calculated by using coding sequence ranges in the gtf from Gencode 27.
-This file is included in the data download.
-SNVs outside of these coding sequences are filtered out before being summed and used for TMB calculations like such:
-
-```
-WGS_coding_only_TMB = (total # coding sequence snvs called by all three of Strelka, Lancet, and Mutect2 ) / intersection_strelka_lancet_mutect_CDS_genome_size
-```
-Because the same WXS BED file applies to all callers, that file is intersected with the coding sequences for filtering and for determining the denominator. 
-```
-WXS_coding_only_TMB = (total # coding sequence snvs called by all three of Strelka, Lancet, and Mutect2 ) /
-intersection_wxs_CDS_genome_size
-```
 
 ## General usage of scripts
 
