@@ -49,7 +49,7 @@ This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS
 Input data is split into training and test partitions according to the user-specified argument TRAIN_PERCENT.
 
 
-### Model Building
+### Model-Building
 
 The default consensus mutations called are those that are shared among all of Strelka2, Mutect2, and Lancet.
 Mutations were considered to be the same if they were identical in the following field: `Chromosome`, `Start_Position`, `Reference_Allele`,  `Allele`, and `Tumor_Sample_Barcode`.
