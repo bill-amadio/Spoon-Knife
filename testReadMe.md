@@ -13,7 +13,7 @@ See the comparison results plots [here](https://cansavvy.github.io/openpbta-note
 - [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
 - [Summary of Methods](#summary-of-methods)
   - [Train/Test](#Train-Test)
-  - [Model Building](#Model-Building)
+  - [Model Building](#Model Building)
   - [Model Evaluation](#Model-Evaluation)
 - [General usage of scripts](#general-usage-of-scripts)
   - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
@@ -47,7 +47,7 @@ This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS
 Input data is split into training and test partitions according to the user-specified argument TRAIN_PERCENT.
 
 
-### Model-Building
+### Model Building
 
 The glmnet package is used to fit an elastic net logistic regression model via penalized maximum likelihood.  The glmnetUtils package is used to do elastic net cross-validation for alpha and lambda simultaneously.
 
