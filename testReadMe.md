@@ -31,7 +31,7 @@ bash run-sex-prediction-from-RNASeq.sh
 ```
 This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS section of the script.  The script will return:
 
-- Plots and tables in a notebook: [`04-present_results.html`](https://cansavvy.github.io/openpbta-notebook-concept/snv-callers/compare_snv_callers_plots.nb.html).  Tables: confusion matrix and two class summary reports for the model with maximum accuracy.  Plots: strength of calls on the test set for the maximum accuracy model, predictive accuracy vs. number of training transcripts and number non-zero features vs. number of training transcripts.
+- Plots and tables in a notebook: `04-present_results.html`.  Tables: confusion matrix and two class summary reports for the model with maximum accuracy.  Plots: strength of calls on the test set for the maximum accuracy model, predictive accuracy vs. number of training transcripts and number non-zero features vs. number of training transcripts.
 - Files organized in subfolders of the folder containing run-sex-prediction-from-RNASeq.sh as follows:
   - `processed_data` holds the output of script 01-clean_split_data.R.  Five files: expression and target files for training and testing plus a file containing the training and testing target values combined.
   - `models` holds the output of script 02-train_elasticnet.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the best fitting model object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the indices of the training transcripts used in that model and the non-zero coefficients of the model.
