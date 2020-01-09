@@ -10,13 +10,13 @@ Based on the accuracy achieved here, this is probably not happening, and this cl
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  
 
-- [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-RNASeq)
+- [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-seq)
 - [Summary of Methods](#summary-of-methods)
-  - [Train/Test](#Train-Test)
-  - [Model Building](#Model-Building)
-  - [Model Evaluation](#Model-Evaluation)
+  - [Train/Test](#train-test)
+  - [Model Building](#model-building)
+  - [Model Evaluation](#model-evaluation)
 - [General usage of scripts](#general-usage-of-scripts)
-  - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-RNASeq)
+  - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-seq)
   - [01-clean_split_data.R](#01-clean-split-data)
   - [02-train_elasticnet.R](#02-train_elasticnet)  
   - [03-evaluate_model.R](#03-evaluate_model)
@@ -24,7 +24,7 @@ Based on the accuracy achieved here, this is probably not happening, and this cl
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## How to run sex-prediction-from-RNASeq
+## How to run sex-prediction-from-seq
 
 To run the full pipeline of data prep, model building, model evaluation and results presentation, call the bash script:
 
@@ -54,17 +54,17 @@ The script will return:
   
 ## Summary of Methods
 
-### Train-Test
+### train-test
 
 Input data is split into training and test partitions according to the user-specified argument TRAIN_PERCENT.
 
 
-### Model-Building
+### model-building
 
 The glmnet package is used to fit an elastic net logistic regression model via penalized maximum likelihood.
 The glmnetUtils package is used to do elastic net cross-validation for alpha and lambda simultaneously.
 
-### Model-Evaluation
+### model-evaluation
 
 The caret package is used to generate a confusion matrix object and a two-class summary object for each model.
 Definitions of the statistics presented are found in the documentation for the [confusion matrix function](http://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes) and the [two-class summary function](http://topepo.github.io/caret/measuring-performance.html#measures-for-class-probabilities).
