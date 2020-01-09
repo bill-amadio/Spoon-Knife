@@ -1,8 +1,10 @@
 # Sex Prediction from RNASeq
 
-The 01-clean_split_data.R, 02-train_elasticnet.R, 03-evaluate_model.R, 04-present_results.Rmd pipeline trains and evaluates an elasticnet logistic regression model to predict sex from RNASeq data.  The training features are gene expression transcripts, and the training labels are reported_gender values for each sample.
+The 01-clean_split_data.R, 02-train_elasticnet.R, 03-evaluate_model.R, 04-present_results.Rmd pipeline trains and evaluates an elasticnet logistic regression model to predict sex from RNASeq data.  
+The training features are gene expression transcripts, and the training labels are reported_gender values for each sample.
 
-The pipeline is a response to issue [#84](https://github.com/AlexsLemonade/OpenPBTA-analysis/issues/84) which was raised to check whether, in some histologies, silencing might be breaking down, potentially resulting in changes in X inactivation. Based on the accuracy achieved here, this is probably not happening, and this classifier can be helpful to predict values for datasets without annotated sex information.
+The pipeline is a response to issue [#84](https://github.com/AlexsLemonade/OpenPBTA-analysis/issues/84) which was raised to check whether, in some histologies, silencing might be breaking down, potentially resulting in changes in X inactivation. 
+Based on the accuracy achieved here, this is probably not happening, and this classifier can be helpful to predict values for datasets without annotated sex information.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -29,9 +31,12 @@ To run the full pipeline of data prep, model building, model evaluation and resu
 ```
 bash run-sex-prediction-from-RNASeq.sh
 ```
-This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS section of the script.  The script will return:
+This bash script requires arguments that are set in the USER-SPECIFIED ARGUMENTS section of the script.  
+The script will return:
 
-- Plots and tables in a notebook: `04-present_results.html`.  Tables: confusion matrix and two class summary reports for the model with maximum accuracy.  Plots: strength of calls on the test set for the maximum accuracy model, predictive accuracy vs. number of training transcripts and number non-zero features vs. number of training transcripts.
+- Plots and tables in a notebook: `04-present_results.html`.  
+Tables: confusion matrix and two class summary reports for the model with maximum accuracy.  
+Plots: strength of calls on the test set for the maximum accuracy model, predictive accuracy vs. number of training transcripts and number non-zero features vs. number of training transcripts.
 - Files organized in subfolders of the folder containing run-sex-prediction-from-RNASeq.sh as follows:
   - `processed_data` holds the output of script 01-clean_split_data.R.  Five files: expression and target files for training and testing plus a file containing the training and testing target values combined.
   - `models` holds the output of script 02-train_elasticnet.R.  Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: the best fitting model object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, the indices of the training transcripts used in that model and the non-zero coefficients of the model.
