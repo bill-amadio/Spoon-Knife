@@ -79,7 +79,7 @@ Definitions of the statistics presented are found in the documentation for the [
 - The scripts add files whose names do not match existing files, if any, in the output directories.  Output files whose names 
   match existing files overwrite the previous versions.
 
-### run-sex-prediction-from-RNASeq
+### run-sex-prediction-from-seq
 
 A bash shell script that runs the entire pipeline.  
 Global arguments for the pipeline are specified in the USER-SPECIFIED ARGUMENTS section of the script
