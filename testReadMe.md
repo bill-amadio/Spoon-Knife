@@ -48,7 +48,7 @@ The script will return:
   - `results` holds the output of script 03-evaluate_model.R.  
   Three files for each value in the run-sex-prediction-from-RNASeq.sh argument TRANSCRIPT_TAIL_PERCENT_ARRAY: 
     - the caret::confusionMatrix for the model for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value, 
-    - the caret::twoClassSummary object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value (Note: caret::twoClassSummary function can fail under certain conditions, so these files may be missing for certain TRANSCRIPT_TAIL_PERCENT_ARRAY values.)
+    - the caret::twoClassSummary object for the given TRANSCRIPT_TAIL_PERCENT_ARRAY value (Note: caret::twoClassSummary function can fail under certain conditions, so twoClassSummary files may be missing for certain TRANSCRIPT_TAIL_PERCENT_ARRAY values.)
     - prediction probabilities for each sample in the test set.
   - `results/plots` holds .png copies of the plots presented in the `04-present_results.html` notebook.
   
@@ -76,13 +76,13 @@ Definitions of the statistics presented are found in the documentation for the [
 - The scripts are sequential as noted by their number.
 - All file path-related arguments assume the file path specified is relative to `OpenPBTA-analysis/analyses/sex-prediction-from-RNASeq`.
 - The scripts create user-specified output directories that do not exist at run time.
-- The scripts add files whose names do not match existing files, if any, in the output directories.  Output files whose names 
-  match existing files overwrite the previous versions.
+- The scripts add files whose names do not match existing files, if any, in the output directories.  
+Output files whose names match existing files overwrite the previous versions.
 
 ### run-sex-prediction-from-seq
 
 A bash shell script that runs the entire pipeline.  
-Global arguments for the pipeline are specified in the USER-SPECIFIED ARGUMENTS section of the script
+Global arguments for the pipeline are specified in the USER-SPECIFIED ARGUMENTS section of the script.
 
 
 **Argument descriptions**
