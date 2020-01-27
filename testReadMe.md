@@ -6,24 +6,6 @@ The training features are gene expression transcripts, and the training labels a
 The pipeline is a response to issue [#84](https://github.com/AlexsLemonade/OpenPBTA-analysis/issues/84) which was raised to check whether, in some histologies, silencing might be breaking down, potentially resulting in changes in X inactivation.
 Based on the accuracy achieved here, this is probably not happening, and this classifier can be helpful to predict values for datasets without annotated sex information.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  
-
-- [How to run sex prediction from RNASeq](#how-to-run-sex-prediction-from-seq)
-- [Summary of Methods](#summary-of-methods)
-  - [Train/Test](#train-test)
-  - [Model Building](#model-building)
-  - [Model Evaluation](#model-evaluation)
-- [General usage of scripts](#general-usage-of-scripts)
-  - [run-sex-prediction-from-RNASeq.sh](#run-sex-prediction-from-seq)
-  - [01-clean_split_data.R](#01-clean-split-data)
-  - [02-train_elasticnet.R](#02-train_elasticnet)  
-  - [03-evaluate_model.R](#03-evaluate_model)
-  - [04-present_results.Rmd](#04-present_results)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## How to run sex-prediction-from-seq
 
 To run the full pipeline of data prep, model building, model evaluation and results presentation, call the bash script:
